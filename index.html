@@ -1,0 +1,359 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css">
+		<base target="_blank">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+		<style media="screen">
+			.flow-logo {
+				width: 120px;
+				vertical-align: middle;
+				margin-right: -30px;
+			}
+		</style>
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<svg class="flow-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 498.39 252.33">
+					  <title>Flow logo</title>
+					  <g class="flow-logo-mark">
+					    <path fill="#ffca20" opacity=".7" d="M224.74 109l-84.11-84.1h84.11z"></path>
+					    <path fill="#ffca20" opacity=".7" d="M81.72 0h47.68l36.44 36.43H81.72z"></path>
+					    <path fill="#ffcf39" opacity=".9" d="M84.45 84.12L.34 0h101.13v84.11zm73.89 84.1l84.11 84.11h-84.11z"></path>
+					    <path fill="#ffe490" opacity=".7" d="M101.47 168.23l-84.1-84.12h84.11v84.11zm90.58-42.57L125 58.57h67.08zm7.84 118.84l-76.28-76.27h76.28z"></path>
+					    <path fill="#fcbc7c" opacity=".9" d="M101.47 67l-67-67h67z"></path>
+					    <path fill="#f9a040" opacity=".8" d="M123.95 168.22l84.11 84.11h-84.11z"></path>
+					    <path fill="#f9a040" opacity=".7" d="M209.08 201.8l-84-84h84z"></path>
+					    <path fill="#ffcf39" opacity=".9" d="M125 58.57l83.09 83.09H125z"></path>
+					    <path fill="#ffc737" opacity=".7" d="M101.47 252L0 150.51h101.47V252z"></path>
+					  </g>
+					</svg>
+					初次尝试静态检查工具 flow
+				</section>
+				<section>
+					<h2>
+						 What ?
+					</h2>
+					<img src="./assets/intro.png" class="fragment">
+				</section>
+				<section >
+						<h2>
+							 Why ?
+						</h2>
+						<ol >
+							<li class="fragment">CODE FASTER (自动完成 + 类型推导)</li>
+							<li class="fragment">CODE SMARTER (类型提示)</li>
+							<li class="fragment">CODE CONFIDENTLY (类型检测)</li>
+						</ol>
+				</section>
+				<section>
+						<h2>
+							 How ?
+						</h2>
+				</section>
+				<section data-markdown>
+					<script type="text/markdown">
+						## [Cheet sheet](https://flow.org/try/#0PTAEAEDMBsHsHcBQiAuBPADgU1BgTgJYC2BKBAblgCqZYDOoAvKHSoQHYDmoAPqOwFciAIyx5eoYbFjQsAQ3YTB0aBPKwCAE1AhQ6raCLz2DAe01ZIBdlk3JZKUHIBcLNte7MARHN9edYADqsHgA1nQAhIhyTKAAjAGgAKJ4eCFRiLoAYmYAxmSwiujYiJB5BUVyoVgAQtLQABTCrlIyxgCUrqwc3ADeiKCgBJCgTe2g-YODeFgoAniKPl4DoAC+oFjQdDiTUzNzC6BewsuDq4jnusVYsCMoVbX1rk0t9R1MAHxuPagPdTINNgCLDjXTBMKRX7Vf6NOKgsApNJ4KIOb6xe7Q+oNSByLYgxLg8Io2b8ISuQQiMTov5YnF4+HJVLpZCZMBUAQYWSIVFzTlYVwAbW6HgANKTKXgALqxAVeLxigAMkuQugAgqk5GhuSS5Kk4q51XhNQAeCmiPBfZgChUiuIigBMIoAzMrUbq8PbyUJzQLpVabXbHS6VWAAPLCABWWHyoGuqFooAAcrAUDhmLsyChZF13FwRStcoVU+wUDmevnBtACNC0ABVbZ4Z4CBsASU0ZY840YX30mnz521jnYrmTqdiGdI2aOAGVYEZQFRJ1h5QWi1gS64vAA6HcryvV2p1huuZtiNufCYrQYgHdblbnAe5aByOgMacCSPRlDGqhfXZaDsuGQQZCxMIF8hCBpNDke5xl2QY6A5MQGnaK9QHDKN8i3F86AITh2EBAALAg6DFaDYPvYC3BgghclAXIZhgrAoJglwF06BcJjWKjWBoujOFmGo0DbBoAO+TtXAAfhQYiGHgxI6EI2ABGgbRRFAABHYE8DQLI0iIAARVjhBfZjUKmRII2bRwBMcXVlPMUBbljQicGuejXNyapxEgEJ+AQNDUXImJmHgaxNAQLdgrQ4ZRmCuC0OmWZ5kUGx4BckiWIoizzjOC4WSfHDQH+UINgAD2LTQ3w-TDvxKv8VkzKdhSAwZ8HoOhAM4FY5AEGSQi6-LB0kWISq3WyhJErw4ntJ0ABYAFYADYvFQ0C6DaLc4E4Jotya-FdERZl1s27bdva18GSO5FEFisZLxAwoNtkLbYB24Q9qXBlCUhR6TFOt7zpmS6CRCIkhtRYQEmYNLiukUIGl2XRbwuVDEDGhj5FTJo4UQIA)
+						```js
+
+						type primitiveTypes = string | number | boolean | null | void // void means undefined
+
+						let a: string = "aaa" // Works!
+						a = 1 // Error!
+
+						// Function type
+						function takeBool(b: boolean): string {
+						  if (b) {
+						    return "a"
+						  } else {
+						    return "b"
+						  }
+						}
+						// typeof takeBool: (b: boolean) => string
+						takeBool(true) // Works!
+						takeBool(1) // Error!
+						let str = takeBool(false) // Works!
+						let num: number = takeBool(false) // Error!
+
+
+						// Tuple
+						let tuple: [string, number] = ["", 0]
+
+						// Array
+						let arr1: Array<number> = [0,1,2,3]
+						let arr2: number[] = [0,1,2,3]
+
+						// Object type
+						type Note = {
+						  title: string,
+						  content: string,
+						  likeByUser: (userId: string) => void,
+						}
+
+						let n: Note = {
+						  title: "Some Title",
+						  content: "...",
+						  likeByUser: userId => {
+						    //...
+						  }
+						}
+
+						class Subject<T> {
+						  id: string
+
+						  constructor(data) {
+						    super()
+						    Object.assign(this, data)
+						  }
+
+						  static create(data: T): T { }
+
+						  static getById(id: string): ?this {
+						    // should be queryFromDatabase()
+						    // just get around of the type checker for now
+						    let data = window.data
+						    if (data) {
+						      return new this(data)
+						    }
+						  }
+						}
+
+
+						class Book extends Subject<Book> {
+						  title: string
+						  press: string
+						  author: string
+						}
+
+						let b = Book.getById("123456")
+						console.log(b.title) // Error!
+						console.log(b.press) // Error!
+						if (b) {
+						  console.log(b.title) // Works!
+						  console.log(b.press) // Works!
+						}
+
+						let b1 = new Book({
+						  // ...
+						})
+
+						Book.create(b1)
+
+						// any/mixed type
+						// any: 任何类型, 可以当做任何类型用
+						// mixed: 任何类型, 不可以当做任何类型用
+						```
+					</script>
+				</section>
+				<section data-markdown>
+					<script type="text/markdown">
+						## [Demo1](https://flow.org/try/#0PTAEAEDMBsHsHcBQAXAngBwKagLIENUAjTAZWQCcBLAOwHNQBeUAZwpvoB9RqBXaaRIkg9qAY2SVY1ULUzISsALak2dABQBKAFy4CxMlTqgA3olCgQoAKrN2LJdgBueKnkLRsyABZ5koGAig8FIA5H4A1tSBWhpmoJSQoGrwNAAmCAB0zA4AwlKpGiZx5uRyPOTSAEQAKl7MLKq0lXEAvnGlyOXSvPyIbYgefniMMnIKygbsmoJ4GciwVuhY5Dl4zJjTlgCi5OSw5DqiePygsInK3rCpoAAG84vLq+s3GYiWOHJeV6BH1FF+xB+xw81ykoHQsGYtncqG4fGgoGc0B4mEEoik2Q8GTgtDUwwAZPjQLN7ktMCs1hsNLFLAB1fbhZhAA)
+						```js
+						// @flow
+
+						type MaybeString = string | null
+
+						type MaybeStringAlias = MaybeString
+
+						function getSomeString(): MaybeString {
+						  // Using some variable that flow won't know :)
+						  if (window.someCond) {
+						    return "Ths string"
+						  }
+						  return null
+						}
+
+
+						let a = getSomeString()
+
+						a.toUpperCase()
+						// Error: call of method `toUpperCase`.
+						// Method cannot be called on possibly null value
+
+						console.log(a && a.toUpperCase())
+						// Works
+						```
+					</script>
+				</section>
+				<section data-markdown>
+					<script type="text/markdown">
+						## [Demo2](https://flow.org/try/#0PTAEAEDMBsHsHcBQjIFcB2BjALgS1uqAOYCm2AyrALYnnYBOu6RAFAJQBcoA-AM4NMioAN6JQoEKACqvQaF7USoAG4BDRqoBG0JdgAWq7KBgJQ8AgHIjAa3SmObMaFyRQLeEwAmCAHQKaAMIEnmwiTuL0ZKj0hABEACp6vPICzLFOAL5OkdjRhOio0NCIWYg6RqqgALzEZJQ0dIzM7MiqPtiwUgAOXST0Aaq8JC2SAKL09LD0XJiqRaCwrjT6sJ6gAAYd3b39gyTrPoiSALJkequgs+h2RppKs0UkawSgXbC8stoAnqAF82rQVAkZCYAgKHQ+OCsSoAMhhoDaWx6fQGQ3YjkkAHUptZeEA)
+						```js
+						// @flow
+
+						function getSomeString(): ?string {
+						  // Using some variable that flow won't know :)
+						  if (window.someCond) {
+						    return "Ths string"
+						  }
+						  return null
+						}
+
+						let a = getSomeString()
+
+						a.toUpperCase()
+						// Error: call of method `toUpperCase`.
+						// Method cannot be called on possibly null value
+
+						console.log(a && a.toUpperCase())
+						// Works
+						```
+					</script>
+				</section>
+				<section data-markdown>
+					<script type="text/markdown">
+						## [Demo3](https://flow.org/try/#0PTAEAEDMBsHsHcBQjIFcB2BjALgS1uqAOYCm2AyrALYnnYBOu6RAFAJSgDeiooIoAVQDOTIqCHUSoAG4BDRrIBG0KdgAWs7KBgJQ8AgHItAa3S6AXGx6hckUC3hMAJggB0EmgGECTjt1689GSo9IQARAAqakLiDKJh1gC+1kHYIYToqNDQiMnIKlqyoAC8xGSUNHSMzOyI-ACi9PSw9OagUbgx2ACeAA5SLJlUiiT0HJ02WNS9mrjKUo7qoOokdWAkAB79OCROoDP0slTLfVKwdixCccxWiLKu2LACvf30nrJCJLUNTS1tmLJsqBzqAaOpYHsAAaPZ6vd6fSGuNagACyZDUENAAPQZi0IyxgJUewI+1gQhEym6oEyQLk0FQq0QmAIEhUrjgrCKADIuaB7jCXqN4V82FZ+AB1FrGIRAA)
+						```js
+						// @flow
+
+						function getSomeString() {
+						  // Using some variable that flow won't know :)
+						  if (window.someCond) {
+						    return "Ths string"
+						  }
+						  return null
+						}
+
+						let a = getSomeString()
+
+						a.toUpperCase()
+						// Error: call of method `toUpperCase`.
+						// Method cannot be called on possibly null value
+
+						console.log(a && a.toUpperCase())
+						// Works
+						```
+					</script>
+				</section>
+				<section data-markdown>
+					<script type="text/markdown">
+						## [Demo3](https://flow.org/try/#0PTAEAEDMBsHsHcBQjIFcB2BjALgS1uqAOYCm2AyrALYnnYBOu6RAFAJSgDeiooIoAVQDOTIqCHUSoAG4BDRrIBG0KdgAWs7KBgJQ8AgHItAa3S6AXGx6hckUC3hMAJggB0EmgGECTjt1689GSo9IQARAAqakLiDKJh1gC+1kHYIYToqNDQiMmIKlqyoAC8xGSUNHSMzOzIsq7YsAIADs0k9J6yQiS1-ACi9PSw9OagmLLZoLB2NOqwTqAABo0tbR1dJIuuiPwAsmRq82Oy6GZailLj2SQLBKDNsEIiygCeoJmTctCoJMiYBBIVK44KwigAyMGgeorVrtTrddhWfgAdWGxiEQA)
+						```js
+						// @flow
+						function getSomeString(id: string) {
+							if (window.someCond) {
+								return "Ths string"
+							}
+						}
+
+						let a = getSomeStringById(1)
+
+						console.log(a.toUpperCase())
+						// Error: call of method `toUpperCase`.
+						// Method cannot be called on possibly null value
+
+						console.log(a && a.toUpperCase())
+						// Works
+						```
+					</script>
+				</section>
+				<section data-markdown>
+					<script type="text/markdown">
+						## [Demo4](https://flow.org/try/#0PTAEAEDMBsHsHcBQjIFcB2BjALgS1uqAOYCm2AyrALYnnYBOu6RAFAJSgDeiooIoAVQDOTIqCHUSoAG4BDRrIBG0KdgAWs7KBgJQ8AgHItAa3S6AXGx6hckUC3hMAJggB0EmgGECTjt1689GSo9IQARAAqakLiDKJh1gC+1kHYIYToqNDQiMmIKlqyoAC8xGSUNHSMzOzIsq7YsAIADs0k9J6yQiS1-ACi9PSw9OagmLLZoLB2NOqwTqAABo0tbR1dJIuuiPwAsmRq82Oy6GZailLj2SQLBKDNsEIiygCeoJmTctCoJMiYBBIVK44KwigAyMGgeorVrtTrddhWfgAdWGxiEQA)
+						```js
+						// @flow
+
+						type Action =
+						  | {| type: "FETCH_PENDING", meta: {id: string} |}
+						  | {| type: "FETCH_SUCCESS", payload: { title: string } |}
+						  | {| type: "FETCH_FAILURE", error: { message: string } |}
+
+						function reducer(state={}, action: Action) {
+							switch (action.type) {
+								case 'FETCH_PENDING':
+						      action.meta.id
+									//...
+									return state
+								case 'FETCH_FAILURE':
+						      console.log(action.error.message)
+									//...
+									return state
+							}
+							return state
+						}
+						```
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/markdown">
+						## [Immutable Demo](https://flow.org/try/#0PTAEAEDMBsHsHcBQAXAngBwKagJLMwLagC8oA3oqKANTICWy0mAXKAM7IBOdAdgOYAaRAF8UGbAGVkAQ3wlylGgGNYAVx75OrHqoIAjTJyFVqDQm1YASAEqZpAEwDyPaKgCCnTtNQAePIQA+IVFEJmR2GXxWKVlsUgoqFXVNVgBGY1AzAgtQAG0yekYWUAAiZFSS4QFyQqZWMoAmSoBdYMREEAjYgDoVDUN5VI6wYa78bqy2bvRYdAAKAEpR0Y4eydyABmbu2sxiEp5MeFBdkuXO1fHJ7sg6aE05rJIAhU6ASCydhiZ5A6OT76YM6dYQLIA)
+						```js
+						type Item = {
+						  +title: string,
+						}
+						type State = {
+						  +counter: number,
+						  +items: $ReadOnlyArray<Item>,
+						}
+
+						let state: State = {
+						  counter: 1,
+						  items: [{title: "t1"}, {title: "t2"}],
+						}
+
+
+						state.conter = 1
+
+						state.items.pop()
+
+						state.items[0].title="new title"
+
+						state.items.filter(item => {
+							item.title = "new title"
+						})
+						```
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/markdown">
+						## Some Links
+						* [flow.org](https://flow.org)
+						* [try flow](https://flow.org/try)
+						* [flow cheat sheet](https://www.saltycrane.com/flow-type-cheat-sheet/latest/)
+						* [JSOn to flow](https://transform.now.sh/json-to-flow-types)
+						* [Undocumented advanced features](https://github.com/facebook/flow/issues/2464)
+					</script>
+				</section>
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				history: true,
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>

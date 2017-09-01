@@ -1,5 +1,4 @@
-  // @flow
-
+// @flow
 
 let logger = ['log', 'error', 'warn', 'debug', 'info']
   .reduce((logger, name) => {
@@ -7,7 +6,10 @@ let logger = ['log', 'error', 'warn', 'debug', 'info']
     return logger
   }, {})
 
-logger.log("aa", "bb", 123)
+logger.log.toFixed()
+
+
+let a: number = ''
 
 
 class A {
